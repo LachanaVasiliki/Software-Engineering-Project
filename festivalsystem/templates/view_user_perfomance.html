@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} {{user.username}} - Προβολή Υποβολών {% endblock %}
+
+{% block content %}
+  <h1>Οι υποβολές μου</h1>
+  {% if perfomances %}
+    <ul>
+      {% for perfomance in perfomances %}
+        <li><a href="{% url 'festivalsystem:perfomance_detail' perfomance_id=perfomance.id %}">{{ perfomance.festival }} - {{ perfomance.track }} - {{ perfomance.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Δεν υπάρχουν υποβολές.</p>
+  {% endif %}
+{% endblock %}

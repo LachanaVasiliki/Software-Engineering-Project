@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} {{festival}} - Λεπτομέρειες {% endblock %}
+
+{% block content %}
+  <h1>Τίτλος: {{ festival.title }}</h1>
+  <p><b>Περιγραφή:</b> {{ festival.description }}</p>
+  <b>Tracks:</b> 
+  <ul>
+    {% for track in festival.track_set.all %}
+      <li>{{ track }}</li>
+    {% endfor %}
+  </ul>
+
+  {% if user.is_authenticated %}
+    {% if user_is_program_organizer %}
+      <p>Δεν είστε διοργανωτής για αυτό το perfomance.</p>
+    {% endif %}
+    
+    <ul>
+    {% if submissions_open %}
+      <li><a href="{% url 'festivalsystem:submit_perfomance' festival_id=festival.id %}" class="btn btn-primary">Υποβολή Perfomance</a></li>
+    {% endif %}
+    {% if user_is_program_organizer %}
+      <li><a href="{% url 'festivalsystem:view_fest_perfomances' festival_id=festival.id %}" class="btn btn-primary">Προβολή Perfomances</a></li>
+    {% endif %}
+    </ul>
+  {% endif %}
+{% endblock %}

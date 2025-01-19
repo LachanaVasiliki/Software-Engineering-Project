@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} {{festival}} - Προβολή Perfomances {% endblock %}
+
+{% block content %}
+  <h1>Ανεβασμένα Perfomances</h1>
+  {% for track, perfomances in perfomances_by_track.items %}
+    <h2>Track: {{ track.title }}</h2>
+    <ul>
+      {% if perfomances %}
+        {% for perfomance in perfomances %}
+          <li><a href="{% url 'festivalsystem:perfomance_detail' perfomance_id=perfomance.id %}">{{ perfomance.title }}</a></li>
+        {% endfor %}
+      {% else %}
+        <p>Δεν έχουν ανέβει perfomance για το track.</p>
+      {% endif %}
+    </ul>
+  {% endfor %}
+{% endblock %}

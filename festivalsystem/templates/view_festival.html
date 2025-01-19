@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Προβολή Φεστιβάλ - Σύστημα διαχείρισης Φεστιβάλ{% endblock %}
+
+{% block content %}
+    <h2>Φεστιβάλ</h2>
+    {% if festivals %}
+        <ul>
+            {% for festival in festivals %}
+                <li><a href="{% url 'festivalsystem:festival_details' festival.id %}">{{ festival.title }}</a></li>
+                <!-- Display other festival details as needed -->
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Δεν υπάρχουν Φεστιβάλ.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Λεπτομέρειες Perfomance - Σύστημα διαχείρισης Φεστιβάλ{% endblock %}
+
+{% block content %}
+  <h2>Τίτλος Perfomance : {{ perfomance.title }}</h2>
+  <p><b>Φεστιβάλ:</b> {{ perfomance.festival }}</p>
+  <p><b>Track:</b> {{ perfomance.track }}</p>
+  <p><b>Abstract:</b> {{ perfomance.abstract }}</p>
+  <p><b>Περιεχόμενο:</b> 
+    {% if perfomance.file %}
+      <a href="{% url 'festivalsystem:download_perfomance' perfomance_id=perfomance.id %}" download>Download File</a>
+    {% endif %}
+  </p>
+  <p><b>Artists:</b></p>
+  <ul>
+    {% for artist in perfomance.artists.all %}
+      <li>{{ artist.user.username }}</li>
+    {% endfor %}
+  </ul>
+  <p><b>Κατάσταση:</b> {{ perfomance.get_status_display }}</p>
+
+  {% if user_is_program_organizer and submissions_open %}
+    <a href="{% url 'festivalsystem:add_reviewers' perfomance_id=perfomance.id %}" class="btn btn-primary">Προσθήκη Reviewer</a>
+  {% endif %}
+  {% if user_is_reviewer %}
+    <p>Έχετε οριστεί ως reviewer σε αυτό το perfomance.</p>
+    <a href="{% url 'festivalsystem:review_perfomance' perfomance_id=perfomance.id %}" class="btn btn-primary">
+      {% if review_exists %}
+        Επεξεργασία Review
+      {% else %}
+        Review Perfomance
+      {% endif %}
+    </a>
+  {% endif %}
+{% endblock %}

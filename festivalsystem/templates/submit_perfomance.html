@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}form.festival.title - Υποβολή Perfomance{% endblock %}
+
+{% block content %}
+    <h2>{{ form.festival.title }}: Υποβολή Perfomance</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Υποβολή</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Σύστημα διαχείρισης Φεστιβάλ{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Σύστημα διαχείρισης</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'festivalsystem:index' %}">Αρχική</a></li>
+            <li><a href="{% url 'festivalsystem:festivals' %}">Perfomance</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'festivalsystem:profile' %}">Προφίλ</a></li>
+                <li><a href="{% url 'festivalsystem:view_user_perfomances' %}">Υποβολές μου</a></li>
+                <li><a href="{% url 'festivalsystem:logout' %}">Αποσύνδεση</a></li>
+            {% else %}
+                <li><a href="{% url 'festivalsystem:login' %}">Σύνδεση</a></li>
+                <li><a href="{% url 'festivalsystem:signup' %}">Εγγραφή</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}
+        <!-- Content -->
+        {% endblock %}
+    </main>
+</body>
+</html>
