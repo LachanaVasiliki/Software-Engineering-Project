@@ -14,33 +14,33 @@ Project Goals
 ________________________________________
 What the System Does
 
-Festival Management
+Festival Management:
 
 •	Create and manage festivals
 •	Each festival can include multiple performances
 •	Validation prevents incomplete or inconsistent festival data
 
-Performance Management
+Performance Management:
 
 •	Performances are linked to exactly one festival
 •	Required fields and relationships are validated server-side
 
-User Access
+User Access:
 
 •	Uses Django’s authentication system
 •	Access to actions is controlled through permissions and application logic
 ________________________________________
 Data Model Overview
 
-•	Festival
+•	Festival:
 o	Represents an organized event
 o	Acts as the parent entity for performances
 
-•	Performance
+•	Performance:
 o	Belongs to a single festival
 o	Contains scheduling and descriptive information
 
-•	User
+•	User:
 o	Managed through Django’s built-in authentication system
 
 Relationships are enforced to avoid orphaned or invalid records.
